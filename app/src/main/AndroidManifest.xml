@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.track.client">
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon_app"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_main3"
+        android:supportsRtl="true"
+        android:largeHeap="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <activity android:name="com.track.client.MainActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.track.client.receiver.RestartReceiver" android:exported="true" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.DIAL" />
+                <action android:name="SERVICE_RESTART" />
+<!--                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+<!--        <receiver android:name=".service.MainService$OutGoingCallReceiver" android:exported="true" android:enabled="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+
+        <service android:name="com.track.client.service.MainService" android:exported="true" android:enabled="true" >
+        </service>
+
+        <service android:name="com.track.client.service.GPSChipService" android:exported="true" android:enabled="true" >
+        </service>
+
+<!--        <service-->
+<!--            android:name=".service.MainService2"-->
+<!--            android:permission="android.permission.BIND_CALL_REDIRECTION_SERVICE"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.telecom.CallRedirectionService"/>-->
+<!--            </intent-filter>-->
+<!--        </service>-->
+    </application>
+
+</manifest>
